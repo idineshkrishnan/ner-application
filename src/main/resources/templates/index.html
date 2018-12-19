@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NER Application</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+    <form>
+
+        <div class="container">
+            <h3>Input:</h3>
+            <div class="form-group">
+                <label for="input">Enter Your Text Here!!!</label>
+                <textarea id="input" class="form-control" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="type">Select Type</label>
+                <select class="form-control" id="type" onchange="ner(this.value)">
+                    <option value="">Select Type</option>
+                    <option value="PERSON">Person</option>
+                    <option value="CITY">City</option>
+                    <option value="STATE_OR_PROVINCE">State or Province</option>
+                    <option value="COUNTRY">Country</option>
+                    <option value="TITLE">(Job) Title</option>
+                    <option value="EMAIL">Email</option>
+                </select>
+            </div>
+            <h3>Output:</h3>
+            <div clas="form-group" id="result"></div>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+
+        function ner(type) {
+
+            var input = $("#input").val();
+
+            $.ajax({
+               type: 'POST',
+               url: "http://localhost:8080/api/v1/ner?type="+type,
+               contentType: 'text/plain; charset=utf-8',
+               data: input,
+               success: function(response) {
+                   var result = "";
+                   $.each(response, function (index, value) {
+                       result = result + "<span class='badge badge-success'>"+ value + "</span>&nbsp;";
+                   })
+                   $("#result").html(result);
+               }
+            });
+        }
+
+    </script>
+
+</body>
+</html>
