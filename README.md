@@ -4,7 +4,9 @@ Named Entity Recognizer (NER) with Spring Boot
 ## Video Tutorial
 
 https://www.youtube.com/watch?v=E6gcewlL6jU
+
 https://www.youtube.com/watch?v=yFpxihRf5M8&t=1s
+
 https://www.youtube.com/watch?v=83O0qOMCE6I
 
 ## Screen Shot (Extracting Person)
